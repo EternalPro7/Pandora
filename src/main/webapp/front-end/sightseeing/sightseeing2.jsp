@@ -222,7 +222,7 @@ pageEncoding="UTF-8"%>
           <div class="col-4">
             <div id="logo_home">
               <h1>
-                <a href="index.html" title="Welcome to royal Pandora"
+                <a href="javascript:window.location.href='/pandora/PackagesServlet?action=homePage'" title="Welcome to royal Pandora"
                   >Welcome to royal Pandora</a
                 >
               </h1>
@@ -681,7 +681,7 @@ pageEncoding="UTF-8"%>
     <script>
       var first = document.querySelector("#first");
       axios
-        .post("http://localhost:8080/pandora/SightseeingServlet")
+        .post("http://localhost:8081/pandora/SightseeingServlet")
         .then((response) => {
           scv = response.data
             .replace("[", "")
@@ -702,7 +702,7 @@ pageEncoding="UTF-8"%>
         	$("select#second").html("<option>請選擇</option>");
         	return;
         }
-        let url = "http://localhost:8080/pandora/PortSelect";
+        let url = "http://localhost:8081/pandora/PortSelect";
         axios.post(url, { item }).then((response) => {
           scv = response.data
             .replace("[", "")
@@ -763,7 +763,7 @@ pageEncoding="UTF-8"%>
               });
             break;
         }
-        let url = "http://localhost:8080/pandora/LaLoPicServlet";
+        let url = "http://localhost:8081/pandora/LaLoPicServlet";
         axios.post(url, { port }).then((response) => {
           var lalo = response.data.split(" ");
           let sss = "";

@@ -9,28 +9,38 @@ public class packages_CompositeQuery {
 	public static String get_aCondition_For_myDB(String columnName, String value) {
 
 		String aCondition = null;
-
+		System.out.println(columnName+"1");
+		System.out.println(value+"2");
 		if ("Departure".equals(columnName) || "Destination".equals(columnName)) {// 用於varchar
-
+			if(value.equals("請選擇" )) {
+				aCondition += "";	
+			}else {
 			aCondition = columnName + " like '%" + value + "%'";
-
+			}
 		} else if ("Duration".equals(columnName)) {
 			System.out.println(value);
-			if (value.equals("1~5天") || value.equals("5")) {
-				aCondition = "Duration" + "<=" + "5";
-			} else if (value.equals("6~9天") || value.equals("10")) {
-				aCondition = "Duration" + ">" + "5" + "&&" + "Duration" + "<" + "10";
-			} else if (value.equals("10天以上") || value.equals("20")) {
-				aCondition = "Duration" + ">" + "10";
+			if(value.equals("請選擇" )) {
+				aCondition += "";	
+			}else {
+				
+				if (value.equals("1~5天") || value.equals("5")) {
+					aCondition = "Duration" + "<=" + "5";
+				} else if (value.equals("6~9天") || value.equals("10")) {
+					aCondition = "Duration" + ">" + "5" + "&&" + "Duration" + "<" + "10";
+				} else if (value.equals("10天以上") || value.equals("20")) {
+					aCondition = "Duration" + ">" + "10";
+				}
 			}
 
 //			aCondition = "Duration" + ">=" + value;
 		} else if ("DepartureTime".equals(columnName)) { // 用於date
-			if (value.equals("請選擇啟航日期")) {
-				aCondition = "";
+			if(value.equals("請選擇" )) {
+				aCondition += "";	
+			}else {
+				
+				
+				aCondition = "Departure_Time" + " like '%" + value + "%'";
 			}
-
-			aCondition = "Departure_Time" + " like '%" + value + "%'";
 		} else if ("whichPage".equals(columnName)) {
 			return "";
 		}
@@ -49,14 +59,15 @@ public class packages_CompositeQuery {
 		for (String key : keys) {
 			System.out.println(key + "====" + Arrays.toString(map.get(key)));
 			String value = map.get(key)[0];
-			if (value != null && value.trim().length() != 0 && !"action".equals(key)) {
+			if (value != null && value.trim().length() != 0 && !"action".equals(key) && value != "null" && !value.equals("請選擇")) {
 				count++;
+				System.out.println(value);
 				String aCondition = get_aCondition_For_myDB(key, value.trim());
 
 				if (count == 1) {
 					whereCondition.append(" where " + aCondition);
 				} else {
-					if (aCondition != "") {
+					if (aCondition != "" && !value.equals("請選擇")) {
 						whereCondition.append(" and " + aCondition);
 					}
 
@@ -75,10 +86,10 @@ public class packages_CompositeQuery {
 		// java.util.Map<java.lang.String,java.lang.String[]> 之測試
 		Map<String, String[]> map = new TreeMap<String, String[]>();
 
-		map.put("Duration", new String[] { "5" });
+		map.put("Duration", new String[] { "請選擇" });
 		map.put("Departure", new String[] { "台灣 基隆港" });
-		map.put("Destination", new String[] { "台灣 基隆港" });
-		map.put("Departure_Time", new String[] { "2022-08" });
+		map.put("Destination", new String[] { "請選擇" });
+		map.put("Departure_Time", new String[] { "請選擇" });
 		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
 
 		String finalSQL = "select * from Packages " + packages_CompositeQuery.get_WhereCondition(map)
