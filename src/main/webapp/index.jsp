@@ -57,7 +57,7 @@
   <!-- Header================================================== -->
   <%@ include file="/front-end/header.jsp" %> 
   <!-- End Header -->
- <form action="<%=request.getContextPath()%>/PackagesServlet" method="POST">
+ <form action="<%=request.getContextPath()%>/IndexServlet" method="POST">
   <section id="search_container" style="background: url('https://picsum.photos/1903/800?random=5')">
     
    
@@ -312,8 +312,8 @@
       data: { "action": "homePage" },
       dataType: "json",
       success: function(data){
-        console.log(data);
-        console.log("success");
+//         console.log(data);
+//         console.log("success");
 //         let count = parseInt(data.destinationDistinct.length);
         let destinationAll='<option>請選擇</option>';
         for(let i = 0 ;i< parseInt(data.destinationDistinct.length);i++ ){
@@ -353,11 +353,11 @@
 			  
 		  });
 		  request.done(function(data){
-		  	console.log(data)
-		  	console.log(data.departureDistinct)
-		  	console.log(data.packageNoList.length)
-			console.log(data.Duration)
-			console.log(data.departureTimeDistinct)
+// 		  	console.log(data)
+// 		  	console.log(data.departureDistinct)
+// 		  	console.log(data.packageNoList.length)
+// 			console.log(data.Duration)
+// 			console.log(data.departureTimeDistinct)
 
 			let departureAll='<option>請選擇</option>';
 			data.departureDistinct.forEach(function(departureDistinct){
@@ -439,17 +439,17 @@
 	  $("#destinationID").change(function(){
 // 		  alert($( this ).val())
 		  var request=$.ajax({
-			url: "<%=request.getContextPath()%>/PackagesServlet",
+			url: "<%=request.getContextPath()%>/IndexServlet",
 		 	method:"POST",				  
 		 	data:{"action":"updateOption","Destination":$( this ).val(),"Departure":$(departureID).val(),"DepartureTime":$(departureTimeID).val(),"Duration":$(durationID).val()},
 		 	dataType:"json"
 			  
 		  });
 		  request.done(function(data){
-		  	console.log(data)
-		  	console.log(data.packageNoList.length)
-			console.log(data.Duration)
-			console.log(data.departureTimeDistinct)
+// 		  	console.log(data)
+// 		  	console.log(data.packageNoList.length)
+// 			console.log(data.Duration)
+// 			console.log(data.departureTimeDistinct)
 			
 			
 			
@@ -537,7 +537,7 @@
 	  $("#departureTimeID").change(function(){
 // 		  alert($( this ).val())
 		  var request=$.ajax({
-			url: "<%=request.getContextPath()%>/PackagesServlet",
+			url: "<%=request.getContextPath()%>/IndexServlet",
 		 	method:"POST",				  	
 		 	data:{"action":"updateOption","DepartureTime":$( this ).val(),"Departure":$(departureID).val(),"Destination":$(destinationID).val(),"Duration":$(durationID).val()},
 		 	dataType:"json"
@@ -626,17 +626,17 @@
 	  $("#durationID").change(function(){
 // 		  alert($( this ).val())
 		  var request=$.ajax({
-			url: "<%=request.getContextPath()%>/PackagesServlet",
+			url: "<%=request.getContextPath()%>/IndexServlet",
 		 	method:"POST",				  	
 		 	data:{"action":"updateOption","Duration":$( this ).val(),"Departure":$(departureID).val(),"Destination":$(destinationID).val(),"DepartureTime":$(departureTimeID).val()},
 		 	dataType:"json"
 			  
 		  });
 		  request.done(function(data){
-		  	console.log(data)
-		  	console.log(data.packageNoList.length)
-			console.log(data.Duration)
-			console.log(data.departureTimeDistinct)
+// 		  	console.log(data)
+// 		  	console.log(data.packageNoList.length)
+// 			console.log(data.Duration)
+// 			console.log(data.departureTimeDistinct)
 			
 			
 			
@@ -717,14 +717,14 @@
     	$('#clearBtn').click(function(){
 //     		alert("HI");
     		var request = $.ajax({
-   			  url: "<%=request.getContextPath()%>/PackagesServlet",
+   			  url: "<%=request.getContextPath()%>/IndexServlet",
    			  method: "POST",
    			  data:{"action":"updateOption"},
    			  dataType: "json"
     		});
     			 
     		request.done(function( data ) {
-    			console.log(data)
+//     			console.log(data)
     			
 	    		let departureAll='<option>請選擇</option>';
 	    		data.departureDistinct.forEach(function(departure){
@@ -777,15 +777,15 @@
           },
         },
         function (start, end, label) {
-          console.log(
-            "New date range selected: " +
-            start.format("YYYY-MM-DD") +
-            " to " +
-            end.format("DD-MM-YYYY") +
-            " (predefined range: " +
-            label +
-            ")"
-          );
+//           console.log(
+//             "New date range selected: " +
+//             start.format("YYYY-MM-DD") +
+//             " to " +
+//             end.format("DD-MM-YYYY") +
+//             " (predefined range: " +
+//             label +
+//             ")"
+//           );
         }
       );
     });

@@ -8,7 +8,6 @@
 <%
 ForumVO forumVO = (ForumVO) request.getAttribute("forumVO");
 %>
-<%= forumVO==null %>--${forumVO.postId}--
 
     
 <!DOCTYPE html>

@@ -222,7 +222,7 @@ pageEncoding="UTF-8"%>
           <div class="col-4">
             <div id="logo_home">
               <h1>
-                <a href="javascript:window.location.href='/pandora/PackagesServlet?action=homePage'" title="Welcome to royal Pandora"
+                <a href="javascript:window.location.href='/pandora/index.jsp'" title="Welcome to royal Pandora"
                   >Welcome to royal Pandora</a
                 >
               </h1>

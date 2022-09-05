@@ -111,7 +111,7 @@
                             <div class="col-xl-3">
                                 <h1 class="mb-15">討論區</h1>
                                 <div class="breadcrumb">
-                                    <a href="forumAdd.jsp" rel="nofollow"><i class="fi-rs-home mr-5"></i>發表文章</a>
+                                    <a href="<%=request.getContextPath()%>/front-end/forum/forumAdd.jsp" rel="nofollow"><i class="fi-rs-home mr-5"></i>發表文章</a>
                                     <span></span> 
                                 </div>
                             </div>

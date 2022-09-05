@@ -32,13 +32,13 @@
   <title>Welcome to Royal Pandora_Packages</title>
 
   <!-- Favicons-->
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="<%=request.getContextPath()%>/front-end/package/img/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png" />
   <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png" />
   <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
     href="img/apple-touch-icon-114x114-precomposed.png" />
   <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-    href="img/apple-touch-icon-144x144-precomposed.png" />
+    href="<%=request.getContextPath()%>/front-end/package/img/apple-touch-icon-144x144-precomposed.png" />
 
   <!-- GOOGLE WEB FONT -->
   <link
@@ -51,7 +51,7 @@
   <link href="<%=request.getContextPath()%>/front-end/package/css/vendors.css" rel="stylesheet" />
 
   <!-- CUSTOM CSS -->
-  <link href="css/custom.css" rel="stylesheet" />
+  <link href="<%=request.getContextPath()%>/front-end/package/css/custom.css" rel="stylesheet" />
 
 </head>
 
@@ -73,7 +73,7 @@
   <!-- Header================================================== -->
    <%@ include file="/front-end/header.jsp" %> 
   <!-- End Header -->
-<form action="<%=request.getContextPath()%>/PackagesServlet" method="GET">
+<form action="<%=request.getContextPath()%>/IndexServlet" method="POST">
   <section id="search_container" style="background: url('https://picsum.photos/1903/800?random=5')">
     <div id="search">
       <ul class="nav nav-tabs">
@@ -95,7 +95,7 @@
                 <label>出發地</label>
                 <div class="styled-select-common">
                  <select id="departureID"  name="Departure" class="departureSelect"  >
-        			<option value=""></option>
+        			<option value="">請選擇</option>
         				 <c:forEach var="departure" items="${departureDistinct}" > 
            		            		
          		    <option value="${departure}" ${departure==param["Departure"]?"selected":""}>
@@ -110,7 +110,7 @@
                 <label>目的地</label>
                 <div class="styled-select-common">
                  <select id="destinationID" name="Destination" class="destinationSelect" >
-        			<option value="" ></option>
+        			<option value="" >請選擇</option>
         			<c:forEach var="destination" items="${destinationDistinct}" > 
            		            		
          		    <option value="${destination}" ${destination==param["Destination"]?"selected":"" }>         		
@@ -125,7 +125,7 @@
                 <label>出發年月</label>
                 <div class="styled-select-common">
                 <select name="DepartureTime" id="departureTimeID" class="departureTimeSelect">
-        			<option value=""></option>
+        			<option value="">請選擇</option>
         		<c:forEach var="departureTime" items="${departureTimeDistinct}" > 
            		            		
          		    <option value="${departureTime}" ${departureTime==param["DepartureTime"]?"selected":"" }>         		
@@ -140,10 +140,20 @@
                 <label>天數</label>
                 <div class="styled-select-common">
                  <select name="Duration" id="durationID" class="durationSelect">
-                    <option value="" selected></option>
-                    <option value="5">1~5天</option>
+                    <option value="" selected>請選擇</option>
+                 <c:forEach var="packagesListA" items="${packagesListA}" > 
+           		    <c:if test="${ packagesListA.duration <= 5 }">
+         		    <option value="5">1~5天</option>
+         		    </c:if>        		
+         		    <c:if test="${ packagesListA.duration < 10 && packagesListA.duration >= 6}">
                     <option value="10">6~9天</option>
+         		    
+         		    </c:if>
+         		    <c:if test="${ packagesListA.duration > 10}">
+         		    
                     <option value="20">10天以上</option>
+         		    </c:if>
+         		</c:forEach>
                   </select>
                 </div>
               </div>
@@ -176,7 +186,7 @@
           </p>
         </div>
 	<%@ include file="page1.file" %>   
-        <c:forEach var="packageItem" items="${packagesListA}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+       <c:forEach var="packageItem" items="${packagesListA}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
         <div class="row">
           <div class="col-lg-12 col-md-6 wow zoomIn" data-wow-delay="0.1s">
             <div class="tour_container">
@@ -214,7 +224,7 @@
 
               </div>
             </div>
-          </c:forEach>  
+          </c:forEach> 
          <%@ include file="page2.file" %>   
             <!-- End col -->
 
@@ -634,24 +644,24 @@
     		request.done(function( data ) {
     			console.log(data)
     			
-	    		let departureAll='<option></option>';
+	    		let departureAll='<option>請選擇</option>';
 	    		data.departureDistinct.forEach(function(departure){
 	    			departureAll = departureAll + '<option>'+departure+'</option>'
 	    		});
 	    		
-	    		let destinationAll='<option></option>';
+	    		let destinationAll='<option>請選擇</option>';
 	    		data.destinationDistinct.forEach(function(destination){
 	    			destinationAll = destinationAll + '<option>'+destination+'</option>'
 	       		})
 	       		
-	       		let departureTimeAll='<option></option>';
+	       		let departureTimeAll='<option>請選擇</option>';
 	    		data.departureTimeDistinct.forEach(function(departureTime){	    		
 	    			departureTimeAll = departureTimeAll + '<option>'+ departureTime +'</option>'
 	       		})
 	       		
-	       		let durationAll='<option></option>';
+	       		let durationAll='<option>請選擇</option>';
 	    			    				    			
-	    		durationAll = '<option></option>'+'<option value="5">1~5天</option>'+' <option value="10">6~9天</option>'+'<option value="20">10天以上</option>'
+	    		durationAll +='<option value="5">1~5天</option>'+' <option value="10">6~9天</option>'+'<option value="20">10天以上</option>'
 	    		
 	       		
 	   			$('#departureID').html(departureAll);	
@@ -705,7 +715,7 @@
       });
     </script>
 
-    <script src="js/jquery.ddslick.js"></script>
+    <script src="<%=request.getContextPath()%>/front-end/package/js/jquery.ddslick.js"></script>
     <script>
       $("select.ddslick").each(function () {
         $(this).ddslick({

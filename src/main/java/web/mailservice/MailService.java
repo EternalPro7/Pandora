@@ -29,8 +29,10 @@ public class MailService {
 	private final static String AUTH = "true";
 	private final static String PORT = "587";
 	private final static String STARTTLE_ENABLE = "true";
-	private final static String SENDER = "chaseloy0423@gmail.com";
-	private final static String PASSWORD = "vvxdvzloigizrtnt";
+//	private final static String SENDER = "chaseloy0423@gmail.com";
+//	private final static String PASSWORD = "vvxdvzloigizrtnt";
+	private final static String SENDER = "s9999776@gmail.com";
+	private final static String PASSWORD = "sp7244876";
 
 //  設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
 	public void sendMail(String recipients, String mailSubject, String mailBody) {

@@ -169,7 +169,7 @@ public class IndexServlet extends HttpServlet {
 //			req.setAttribute("listPackagesByCompositeQuery",packagesService);
 
 
-			RequestDispatcher successView = req.getRequestDispatcher("/front-end/package/packagesSearch.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+			RequestDispatcher successView = req.getRequestDispatcher("/front-end/index/search.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
 			successView.forward(req, resp);
 		}
 
