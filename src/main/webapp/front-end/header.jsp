@@ -109,7 +109,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 </li>
                 <li class="megamenu submenu">
                   <a
-                    href="javascript:window.location.href='/pandora/front-end/sightseeing/sightseeing2.jsp'"
+                    href="javascript:window.location.href='/pandora/front-end/sightseeing/sightseeing4.jsp'"
                     class="show-submenu-mega"
                     style="width: 100px"
                     >旅遊資訊</a
